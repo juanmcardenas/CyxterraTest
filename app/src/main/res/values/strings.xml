@@ -7,9 +7,12 @@
     <string name="password">password</string>
     <string name="not_registered">Not registered?</string>
     <string name="register">register</string>
-    <string name="select_security_image">Select security image</string>
     <string name="login">login</string>
     <string name="create_account">Create a new account</string>
     <string name="confirm_password">confirm password</string>
     <string name="attempts_title">List of signin attempts</string>
+    <string name="select_security_question">Select a security question</string>
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
+    <string name="answer">answer</string>
 </resources>

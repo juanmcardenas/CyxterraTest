@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="security_questions_array">
+        <item>What is your favorite color?</item>
+        <item>What is your pet\'s name?</item>
+        <item>What is your favorite food</item>
+        <item>What is your favorite movie</item>
+        <item>What was your first girlfriend\'s name</item>
+        <item>What was your first boyfriend\'s name</item>
+        <item>What was your favorite song?</item>
+        <item>What was your favorite actor?</item>
+        <item>What was your favorite book?</item>
+        <item>What was your favorite city?</item>
+        <item>What was your favorite country?</item>
+    </string-array>
+</resources>
