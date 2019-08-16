@@ -1,4 +1,4 @@
-package com.juanmcardenas.cyxandtest.ui.login;
+package com.juanmcardenas.cyxandtest.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.juanmcardenas.cyxandtest.R;
 
-public class LoginActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
