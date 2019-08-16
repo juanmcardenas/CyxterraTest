@@ -3,4 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="cyx_blue">#002639</color>
+    <color name="cyx_cyan_start">#c01b84</color>
+    <color name="cyx_cyan_end">#60068c</color>
 </resources>

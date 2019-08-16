@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="sign_in_profile_width">96dp</dimen>
+    <dimen name="sign_in_profile_height">96dp</dimen>
+    <dimen name="sign_in_content_width">256dp</dimen>
+    <dimen name="sign_in_content_height">48dp</dimen>
+</resources>
