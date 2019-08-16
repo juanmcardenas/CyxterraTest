@@ -50,6 +50,9 @@ public class SignInFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        // Sign In Action
+        binding.loginBtn.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_signInFragment_to_attemptsFragment));
+        // Sign Up Action
         binding.registerBtn.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_signInFragment_to_signUpFragment));
     }
 }
