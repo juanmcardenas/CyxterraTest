@@ -18,14 +18,14 @@ public interface UsersDao {
     @Insert
     void insertUser(User user);
 
-    @Query("SELECT * FROM users WHERE uid = :uid")
-    LiveData<User> getUserByUid(String uid);
+    @Query("SELECT * FROM users WHERE username = :username")
+    LiveData<User> getUserByUsername(String username);
 
     @Query("SELECT * FROM users")
     LiveData<List<User>> getAllUsers();
 
-    @Query("DELETE FROM users WHERE uid = :uid")
-    void deleteUserByUid(String uid);
+    @Query("DELETE FROM users WHERE username = :username")
+    void deleteUserByUsername(String username);
 
 
 }

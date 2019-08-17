@@ -35,15 +35,8 @@ public class Attempt {
         return date;
     }
 
-    public void setDate(long date) {
-        this.date = date;
-    }
-
     public String getResult() {
         return result;
     }
 
-    public void setResult(String result) {
-        this.result = result;
-    }
 }

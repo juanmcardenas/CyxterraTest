@@ -16,18 +16,13 @@ public class User {
     @ColumnInfo(name = "id")
     private int id;
 
-    @ColumnInfo(name = "uid")
-    private int uid;
-
     @ColumnInfo(name = "username")
     private String username;
 
     @ColumnInfo(name = "pass")
     private String pass;
 
-    public User(int id, int uid, String username, String pass) {
-        this.id = id;
-        this.uid = uid;
+    public User(String username, String pass) {
         this.username = username;
         this.pass = pass;
     }
@@ -36,20 +31,8 @@ public class User {
         return id;
     }
 
-    public int getUid() {
-        return uid;
-    }
-
-    public void setUid(int uid) {
-        this.uid = uid;
-    }
-
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPass() {

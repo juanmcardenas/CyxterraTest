@@ -1,7 +1,8 @@
 package com.juanmcardenas.cyxandtest.ui;
 
-import android.app.AlertDialog;
 import android.content.Context;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.MutableLiveData;
 
 import com.juanmcardenas.cyxandtest.R;
@@ -28,6 +29,7 @@ public class SecurityQuestionPicker {
                     dialog.dismiss();
                 })
                 .setNegativeButton(context.getString(R.string.cancel), (dialog, which) -> dialog.dismiss())
+                .create()
                 .show();
     }
 }

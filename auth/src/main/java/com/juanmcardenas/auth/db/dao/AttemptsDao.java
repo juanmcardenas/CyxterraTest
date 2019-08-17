@@ -19,6 +19,6 @@ public interface AttemptsDao {
     void insertAttempt(Attempt attempt);
 
     @Query("SELECT * FROM attempts ORDER BY date DESC LIMIT 100")
-    LiveData<List<Attempt>> getAttempts(String uid);
+    LiveData<List<Attempt>> getAttempts();
 
 }
