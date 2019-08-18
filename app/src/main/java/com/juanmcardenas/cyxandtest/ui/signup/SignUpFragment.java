@@ -7,16 +7,24 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
+import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.juanmcardenas.auth.AuthManager;
+import com.juanmcardenas.auth.db.models.User;
 import com.juanmcardenas.cyxandtest.R;
 import com.juanmcardenas.cyxandtest.databinding.FragmentSignUpBinding;
 import com.juanmcardenas.cyxandtest.ui.SecurityQuestionPicker;
+
+import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Registration screen
@@ -64,6 +72,34 @@ public class SignUpFragment extends Fragment {
                 binding.selectQuestionBtn.setText(s);
                 binding.answerEt.setVisibility(View.VISIBLE);
             }
+        });
+        // Register button
+        binding.registerBtn.setOnClickListener(v -> {
+            AuthManager authManager = new AuthManager();
+            authManager.register(getActivity(), binding.usernameEt.getText().toString(),
+                    binding.passwordEt.getText().toString(),
+                    binding.selectQuestionBtn.getText().toString(),
+                    binding.answerEt.getText().toString())
+                    .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new SingleObserver<User>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onSuccess(User user) {
+                            if (user != null) {
+                                Toast.makeText(getContext(), getResources().getString(R.string.success), Toast.LENGTH_SHORT).show();
+                                Navigation.findNavController(v).navigateUp();
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+                    });
         });
 
     }

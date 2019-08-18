@@ -127,7 +127,7 @@ public class AuthManager {
 
     }
 
-    public Single<User> register(AppCompatActivity activity, String username, String password, String securityQuestion, String answer) {
+    public Single<User> register(FragmentActivity activity, String username, String password, String securityQuestion, String answer) {
         return Single.create(emitter -> new DateRequest().get(activity).subscribe(new SingleObserver<Date>() {
             @Override
             public void onSubscribe(Disposable d) {
