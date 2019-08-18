@@ -242,7 +242,8 @@ public class AuthManager {
     private void registerAttempt(FragmentActivity activity, long date, boolean isSuccess) {
         AuthDatabase.getAuthDatabase(activity).getAttemptsDao()
                 .insertAttempt(new Attempt(date, isSuccess ? "SUCCESS" : "FAIL"))
-                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
     }
 
 
