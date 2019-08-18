@@ -3,4 +3,6 @@
     <string name="location_permission_dialog_title">Enable location permissions</string>
     <string name="location_permission_dialog_messate">Please enable location permissions on your phone and try again</string>
     <string name="ok">OK</string>
+    <string name="error_title">Error</string>
+    <string name="operation_not_successfull">The operation cannot be completed.</string>
 </resources>

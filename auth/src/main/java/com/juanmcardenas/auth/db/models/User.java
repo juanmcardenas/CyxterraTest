@@ -22,7 +22,8 @@ public class User {
     @ColumnInfo(name = "pass")
     private String pass;
 
-    public User(String username, String pass) {
+    public User(int id, String username, String pass) {
+        this.id = id;
         this.username = username;
         this.pass = pass;
     }
@@ -39,7 +40,4 @@ public class User {
         return pass;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
 }

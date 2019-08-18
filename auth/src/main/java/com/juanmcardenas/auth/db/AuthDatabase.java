@@ -18,16 +18,16 @@ import com.juanmcardenas.auth.db.models.User;
 /**
  * Created by Martin Cardenas on 2019-08-16.
  */
-@Database(entities = {Session.class, User.class, Attempt.class}, version = 1)
+@Database(entities = {Session.class, User.class, Attempt.class}, version = 1, exportSchema = false)
 @TypeConverters({DateTimeConverter.class})
 public abstract class AuthDatabase extends RoomDatabase {
 
-    private static AuthDatabase INSTANCE = null;
+    private static AuthDatabase INSTANCE;
 
-    private AuthDatabase() {
+    AuthDatabase() {
     }
 
-    public static AuthDatabase getInstance(Context context) {
+    public static AuthDatabase getAuthDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                     AuthDatabase.class, "auth_db")

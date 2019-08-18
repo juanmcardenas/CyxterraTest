@@ -27,6 +27,10 @@ public class Attempt {
         this.result = result;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

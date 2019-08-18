@@ -35,6 +35,10 @@ public class Session {
         this.expirationDate = expirationDate;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

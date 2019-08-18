@@ -17,7 +17,7 @@ import com.juanmcardenas.auth.util.DialogUtil;
  */
 public class GpsManager {
 
-    private static final int FINE_LOCATION_PERMISSION_REQUEST_CODE = 97412;
+    private static final int FINE_LOCATION_PERMISSION_REQUEST_CODE = 912;
 
     public GpsManager() {
     }
@@ -33,7 +33,7 @@ public class GpsManager {
         // Check if GPS is enabled
 
         // Get coordinates
-        if (ContextCompat.checkSelfPermission(activity.getBaseContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted
             // Should we show an explanation?
@@ -42,7 +42,7 @@ public class GpsManager {
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
-                DialogUtil.showLocationPermissionRequestDialog(activity.getBaseContext());
+                DialogUtil.showLocationPermissionRequestDialog(activity);
             } else {
                 // No explanation needed; request the permission
                 ActivityCompat.requestPermissions(activity,

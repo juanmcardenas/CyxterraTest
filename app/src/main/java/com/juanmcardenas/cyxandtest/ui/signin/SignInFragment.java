@@ -14,9 +14,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.juanmcardenas.auth.AuthManager;
+import com.juanmcardenas.auth.db.models.User;
+import com.juanmcardenas.auth.util.DialogUtil;
 import com.juanmcardenas.cyxandtest.R;
 import com.juanmcardenas.cyxandtest.databinding.FragmentSignInBinding;
 import com.juanmcardenas.cyxandtest.ui.SecurityQuestionPicker;
+
+import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Sign-in screen
@@ -56,7 +64,33 @@ public class SignInFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Sign In Action
-        binding.loginBtn.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_signInFragment_to_attemptsFragment));
+        binding.loginBtn.setOnClickListener(v -> {
+            AuthManager authManager = new AuthManager();
+            authManager.login(getActivity(), binding.usernameEt.getText().toString(),
+                    binding.passwordEt.getText().toString(), binding.selectQuestionBtn.getText().toString(),
+                    binding.answerEt.getText().toString())
+                    .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new SingleObserver<User>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onSuccess(User user) {
+                            if (user != null && user.getUsername() != null && user.getPass() != null) {
+                                Navigation.findNavController(v).navigate(R.id.action_signInFragment_to_attemptsFragment);
+                            } else {
+                                DialogUtil.showErrorDialog(getContext(), AuthManager.RESULT_ERROR_INVALID_CREDENTIALS);
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            DialogUtil.showErrorDialog(getContext(), AuthManager.RESULT_ERROR_INVALID_CREDENTIALS);
+                        }
+                    });
+        });
         // Sign Up Action
         binding.registerBtn.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_signInFragment_to_signUpFragment));
         // Select security question

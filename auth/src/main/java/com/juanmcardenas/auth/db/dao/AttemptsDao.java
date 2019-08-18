@@ -1,6 +1,5 @@
 package com.juanmcardenas.auth.db.dao;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -9,6 +8,9 @@ import com.juanmcardenas.auth.db.models.Attempt;
 
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.Single;
+
 /**
  * Created by Martin Cardenas on 2019-08-16.
  */
@@ -16,9 +18,9 @@ import java.util.List;
 public interface AttemptsDao {
 
     @Insert
-    void insertAttempt(Attempt attempt);
+    Completable insertAttempt(Attempt attempt);
 
     @Query("SELECT * FROM attempts ORDER BY date DESC LIMIT 100")
-    LiveData<List<Attempt>> getAttempts();
+    Single<List<Attempt>> getAttempts();
 
 }
