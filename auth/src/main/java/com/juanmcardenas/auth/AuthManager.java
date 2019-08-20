@@ -193,38 +193,40 @@ public class AuthManager {
                                 User user = new User(0, username, encPass);
                                 AuthDatabase.getAuthDatabase(activity).getUsersDao().insertUser(user)
                                         .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                                        .subscribe();
-                                // Verify that user is on db
-                                AuthDatabase.getAuthDatabase(activity).getUsersDao().getUserByUsername(username)
-                                        .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                                        .subscribe(new SingleObserver<User>() {
-                                            @Override
-                                            public void onSubscribe(Disposable d) {
+                                        .subscribe(() -> {
+                                            // Verify that user is on db
+                                            AuthDatabase.getAuthDatabase(activity).getUsersDao().getUserByUsername(username)
+                                                    .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                                                    .subscribe(new SingleObserver<User>() {
+                                                        @Override
+                                                        public void onSubscribe(Disposable d) {
 //                                              d.dispose();
-                                            }
+                                                        }
 
-                                            @Override
-                                            public void onSuccess(User user) {
-                                                if (user != null && user.getUsername() != null && user.getUsername().contentEquals(username)) {
-                                                    // register SUCCESS attempt
-                                                    registerAttempt(activity, date.getTime(), true);
-                                                    // send response back
-                                                    emitter.onSuccess(user);
-                                                } else {
-                                                    // register FAIL attempt
-                                                    registerAttempt(activity, date.getTime(), false);
-                                                    // send response back
-                                                    emitter.onError(new Exception(RESULT_ERROR_INVALID_CREDENTIALS));
-                                                }
-                                            }
+                                                        @Override
+                                                        public void onSuccess(User user) {
+                                                            if (user != null && user.getUsername() != null && user.getUsername().contentEquals(username)) {
+                                                                // register SUCCESS attempt
+                                                                registerAttempt(activity, date.getTime(), true);
+                                                                // send response back
+                                                                emitter.onSuccess(user);
+                                                            } else {
+                                                                // register FAIL attempt
+                                                                registerAttempt(activity, date.getTime(), false);
+                                                                // send response back
+                                                                emitter.onError(new Exception(RESULT_ERROR_INVALID_CREDENTIALS));
+                                                            }
+                                                        }
 
-                                            @Override
-                                            public void onError(Throwable e) {
-                                                // register FAIL attempt
-                                                registerAttempt(activity, date.getTime(), false);
-                                                // send response back
-                                                emitter.onError(new Exception(RESULT_ERROR_INVALID_CREDENTIALS));
-                                            }
+                                                        @Override
+                                                        public void onError(Throwable e) {
+                                                            // register FAIL attempt
+                                                            registerAttempt(activity, date.getTime(), false);
+                                                            // send response back
+                                                            emitter.onError(new Exception(RESULT_ERROR_INVALID_CREDENTIALS));
+                                                        }
+                                                    });
+
                                         });
                             }
                         });

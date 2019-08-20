@@ -19,7 +19,10 @@ import com.juanmcardenas.auth.db.models.User;
 import com.juanmcardenas.auth.util.DialogUtil;
 import com.juanmcardenas.cyxandtest.R;
 import com.juanmcardenas.cyxandtest.databinding.FragmentSignInBinding;
+import com.juanmcardenas.cyxandtest.di.components.DaggerAppComponent;
 import com.juanmcardenas.cyxandtest.ui.SecurityQuestionPicker;
+
+import javax.inject.Inject;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -31,6 +34,9 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class SignInFragment extends Fragment {
 
+    @Inject
+    public AuthManager authManager;
+
     private FragmentSignInBinding binding;
     private MutableLiveData<String> securityQuestionLiveData;
 
@@ -38,17 +44,11 @@ public class SignInFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static SignInFragment newInstance() {
-        SignInFragment fragment = new SignInFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         securityQuestionLiveData = new MutableLiveData<>();
+        DaggerAppComponent.builder().build().inject(this);
     }
 
     @Override
@@ -65,7 +65,6 @@ public class SignInFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         // Sign In Action
         binding.loginBtn.setOnClickListener(v -> {
-            AuthManager authManager = new AuthManager();
             authManager.login(getActivity(), binding.usernameEt.getText().toString(),
                     binding.passwordEt.getText().toString(), binding.selectQuestionBtn.getText().toString(),
                     binding.answerEt.getText().toString())

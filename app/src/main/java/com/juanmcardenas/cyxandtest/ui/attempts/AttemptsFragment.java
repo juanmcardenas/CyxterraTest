@@ -15,6 +15,9 @@ import android.view.ViewGroup;
 import com.juanmcardenas.auth.AuthManager;
 import com.juanmcardenas.cyxandtest.R;
 import com.juanmcardenas.cyxandtest.databinding.FragmentAttemptsBinding;
+import com.juanmcardenas.cyxandtest.di.components.DaggerAppComponent;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -23,6 +26,9 @@ import io.reactivex.schedulers.Schedulers;
  * Main screen to see attempts
  */
 public class AttemptsFragment extends Fragment {
+
+    @Inject
+    public AuthManager authManager;
 
     private FragmentAttemptsBinding binding;
 
@@ -40,6 +46,7 @@ public class AttemptsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DaggerAppComponent.builder().build().inject(this);
     }
 
     @Override
@@ -55,7 +62,6 @@ public class AttemptsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Fetch list of attempts
-        AuthManager authManager = new AuthManager();
         authManager.getAttemptList(getActivity())
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(attempts -> {
