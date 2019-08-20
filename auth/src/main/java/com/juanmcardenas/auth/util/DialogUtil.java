@@ -21,10 +21,10 @@ public class DialogUtil {
                 .show();
     }
 
-    public static void showErrorDialog(Context context, int errorCode) {
+    public static void showErrorDialog(Context context, String errorCode) {
         new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.CyxDialog))
                 .setTitle(R.string.error_title)
-                .setMessage(R.string.operation_not_successfull)
+                .setMessage(R.string.operation_not_successfull + " " + errorCode)
                 .setPositiveButton(R.string.ok, (dialog, which) -> dialog.dismiss())
                 .create()
                 .show();

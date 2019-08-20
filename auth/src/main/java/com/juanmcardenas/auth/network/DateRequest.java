@@ -6,6 +6,7 @@ import android.location.Location;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
+import com.juanmcardenas.auth.AuthManager;
 import com.juanmcardenas.auth.location.GpsManager;
 import com.juanmcardenas.auth.network.models.GeoNamesResponse;
 
@@ -31,7 +32,7 @@ public class DateRequest {
             GpsManager gpsManager = new GpsManager();
             Location location = gpsManager.get(activity);
             if (location == null) {
-                emitter.onError(new Throwable("Null location"));
+                emitter.onError(new Throwable(AuthManager.RESULT_ERROR_NO_GPS));
                 return;
             }
             String url = DATE_REQUEST_URL.replace("{DeviceLatitude}", String.valueOf(location.getLatitude()))

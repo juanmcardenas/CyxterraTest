@@ -78,7 +78,7 @@ public class SignInFragment extends Fragment {
 
                         @Override
                         public void onSuccess(User user) {
-                            if (user != null && user.getUsername() != null && user.getPass() != null) {
+                            if (user != null && user.getUsername() != null) {
                                 Navigation.findNavController(v).navigate(R.id.action_signInFragment_to_attemptsFragment);
                             } else {
                                 DialogUtil.showErrorDialog(getContext(), AuthManager.RESULT_ERROR_INVALID_CREDENTIALS);

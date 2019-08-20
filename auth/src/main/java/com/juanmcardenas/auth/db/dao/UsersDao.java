@@ -21,8 +21,11 @@ public interface UsersDao {
     @Insert
     Completable insertUser(User user);
 
-    @Query("SELECT * FROM users WHERE username = :username")
+    @Query("SELECT id, username FROM users WHERE username = :username")
     Single<User> getUserByUsername(String username);
+
+    @Query("SELECT id, username FROM users WHERE username = :username AND pass = :password")
+    Single<User> getUserByUsernameAndPassword(String username, String password);
 
     @Query("SELECT * FROM users")
     Single<List<User>> getAllUsers();

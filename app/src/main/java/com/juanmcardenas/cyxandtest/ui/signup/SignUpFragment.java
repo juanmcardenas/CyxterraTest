@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.juanmcardenas.auth.AuthManager;
 import com.juanmcardenas.auth.db.models.User;
+import com.juanmcardenas.auth.util.DialogUtil;
 import com.juanmcardenas.cyxandtest.R;
 import com.juanmcardenas.cyxandtest.databinding.FragmentSignUpBinding;
 import com.juanmcardenas.cyxandtest.ui.SecurityQuestionPicker;
@@ -78,6 +79,7 @@ public class SignUpFragment extends Fragment {
             AuthManager authManager = new AuthManager();
             authManager.register(getActivity(), binding.usernameEt.getText().toString(),
                     binding.passwordEt.getText().toString(),
+                    binding.confirmPasswordEt.getText().toString(),
                     binding.selectQuestionBtn.getText().toString(),
                     binding.answerEt.getText().toString())
                     .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
@@ -92,12 +94,14 @@ public class SignUpFragment extends Fragment {
                             if (user != null) {
                                 Toast.makeText(getContext(), getResources().getString(R.string.success), Toast.LENGTH_SHORT).show();
                                 Navigation.findNavController(v).navigateUp();
+                            } else {
+                                DialogUtil.showErrorDialog(getContext(), AuthManager.RESULT_ERROR_INVALID_CREDENTIALS);
                             }
                         }
 
                         @Override
                         public void onError(Throwable e) {
-
+                            DialogUtil.showErrorDialog(getContext(), e.getMessage());
                         }
                     });
         });
