@@ -6,7 +6,6 @@ import com.juanmcardenas.auth.db.AuthDatabase;
 import com.juanmcardenas.auth.db.models.Attempt;
 import com.juanmcardenas.auth.db.models.User;
 import com.juanmcardenas.auth.network.DateRequest;
-import com.juanmcardenas.auth.util.DialogUtil;
 import com.juanmcardenas.auth.util.SecurityUtil;
 
 import java.util.Date;
